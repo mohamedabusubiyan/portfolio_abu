@@ -1,0 +1,120 @@
+MOHAMED ABU SUBIYAN M
+SOFTWARE DEVELOPER
+
+Phone    : +91 7339069595
+Email    : mohamedabusubiyanm@gmail.com
+LinkedIn : linkedin.com/in/mohamed-abu-subiyan-m-260509288
+GitHub   : github.com/mohamedabusubiyan
+Location : Tirunelveli, Tamil Nadu
+
+------------------------------------------------------------
+
+PROFILE
+
+Software Developer with experience in backend and frontend
+development using PHP, Laravel, MySQL, REST APIs, and
+database-driven systems. Skilled in building scalable web
+applications, dashboard systems, API integrations, and
+workflow-based solutions with clean and efficient development
+practices.
+
+------------------------------------------------------------
+
+TECHNICAL SKILLS
+
+* Languages: PHP, Python, Kotlin, SQL
+
+* Frameworks: Laravel, REST API, HTML5, CSS3
+
+* Tools: Docker, Git, GitHub, Postman,
+  VS Code, PhpStorm, Android Studio
+
+* Database: MySQL
+
+------------------------------------------------------------
+
+EXPERIENCE
+
+SOFTWARE DEVELOPER INTERN
+DropTruck – WeHaul Logistics Pvt Ltd
+Sep 2025 – Present
+
+* Working on backend and frontend development for internal
+  dashboard and panel management systems.
+* Developing Laravel-based web applications with MySQL
+  database integration.
+* Implementing REST APIs, API routes, authentication,
+  CRUD operations, and workflow-based features.
+* Managing database operations and improving application
+  functionality for internal business workflows.
+* Using Git, GitHub, Postman, and Docker in development
+  and testing processes.
+* Collaborating with teams to build scalable and efficient
+  software solutions.
+
+WEB DEVELOPMENT INTERN
+Brassy Academy – Tirunelveli, Tamil Nadu
+Feb 2023
+
+* Learned and worked with HTML, CSS, and Angular for
+  responsive web application development.
+* Improved frontend development, debugging, and
+  component-based development skills.
+* Gained practical exposure to real-time web development
+  workflows and UI implementation.
+
+------------------------------------------------------------
+
+PROJECTS
+
+INSURANCE MANAGEMENT SYSTEM
+Final Year Project
+
+* Developed a web-based Insurance Management System using
+  Laravel/PHP, MySQL, HTML, and CSS.
+* Implemented authentication, policy management,
+  admin dashboard, and database-driven functionalities.
+* Built modules for managing users, policies,
+  and application workflows.
+
+JOB BOARD, TASK MANAGEMENT & EVENT MANAGEMENT SYSTEMS
+Learning Projects
+
+* Developed multiple Laravel-based applications during
+  backend development learning and practice.
+* Implemented authentication, CRUD operations,
+  routing, form handling, and MySQL integration.
+* Built features for job posting, task tracking,
+  and event scheduling systems.
+
+TITLE GENERATOR WITH MACHINE LEARNING
+Mini Project
+
+* Developed a machine learning-based title generator
+  using Python.
+* Used TensorFlow, NumPy, Pandas, and Scikit-learn
+  for model building and data processing.
+
+------------------------------------------------------------
+
+EDUCATION
+
+PET ENGINEERING COLLEGE
+Bachelor of Engineering – Computer Science
+2021 – 2025
+CGPA: 8/10
+
+HSSLC BOARD EXAM
+Govt. Hr. Sec. School
+2021 – 88%
+
+SSLC BOARD EXAM
+Govt. Hr. Sec. School
+2019 – 87%
+
+------------------------------------------------------------
+
+LANGUAGES
+
+* English
+* Tamil
