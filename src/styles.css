@@ -433,10 +433,10 @@ h1, h2, h3, p { margin-top: 0; }
   max-width: 1180px;
   margin: 0 auto clamp(70px, 9vw, 112px);
   color: #d2d2d2;
-  font-size: clamp(54px, 5.25vw, 78px);
-  font-weight: 300;
+  font-size: clamp(44px, 4.45vw, 64px);
+  font-weight: 100;
   letter-spacing: -0.045em;
-  line-height: 0.98;
+  line-height: 1.04;
 }
 .about-divider {
   max-width: 1180px;
@@ -711,138 +711,6 @@ h1, h2, h3, p { margin-top: 0; }
 .mockup span:nth-child(2) { right: 38px; bottom: 38px; width: 42%; height: 88px; background: rgba(200,255,77,0.13); }
 .mockup span:nth-child(3) { left: 38px; bottom: 46px; width: 34%; height: 50px; background: rgba(200,255,77,0.24); }
 
-.github-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  align-items: center;
-  gap: 18px;
-  margin-top: 22px;
-  border: 0;
-  background: transparent;
-}
-.github-card {
-  width: 100%;
-  height: 260px;
-  border: 0;
-  background: transparent;
-  padding: 0;
-  object-fit: contain;
-  filter: contrast(1.05);
-}
-.stats-card {
-  object-position: center;
-  border-radius: 7px;
-}
-.languages-card {
-  border-radius: 7px;
-}
-.github-grid .wide { grid-column: 1 / -1; }
-.contribution-card {
-  border: 1px solid rgba(200, 255, 77, 0.16);
-  background:
-    linear-gradient(145deg, rgba(200, 255, 77, 0.055), transparent 34%),
-    rgba(3, 8, 14, 0.9);
-  box-shadow: inset 0 0 0 1px rgba(0, 240, 80, 0.04);
-  padding: clamp(18px, 3vw, 34px);
-}
-.contribution-heading {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 18px;
-  margin-bottom: 24px;
-}
-.contribution-heading h3 {
-  margin: 0;
-  color: #e8edf5;
-  font-size: clamp(18px, 2vw, 24px);
-  font-weight: 800;
-}
-.contribution-heading span {
-  color: #9aa3af;
-  font-size: 14px;
-}
-.contribution-status {
-  margin: 0;
-  color: var(--soft);
-  font-size: 16px;
-}
-.calendar-shell {
-  overflow-x: auto;
-  padding-bottom: 6px;
-}
-.calendar-months {
-  display: grid;
-  gap: 4px;
-  min-width: 887px;
-  margin-left: 48px;
-  color: #d7dde6;
-  font-size: 15px;
-}
-.calendar-months span {
-  min-width: 42px;
-}
-.calendar-body {
-  display: flex;
-  gap: 10px;
-  min-width: 935px;
-  margin-top: 8px;
-}
-.calendar-days {
-  display: grid;
-  grid-template-rows: repeat(7, 13px);
-  gap: 4px;
-  width: 38px;
-  color: #d7dde6;
-  font-size: 14px;
-}
-.calendar-days span:nth-child(1) { grid-row: 2; }
-.calendar-days span:nth-child(2) { grid-row: 4; }
-.calendar-days span:nth-child(3) { grid-row: 6; }
-.calendar-grid {
-  display: flex;
-  gap: 4px;
-}
-.calendar-week {
-  display: grid;
-  grid-template-rows: repeat(7, 13px);
-  gap: 4px;
-}
-.calendar-day,
-.calendar-legend i {
-  width: 13px;
-  height: 13px;
-  border-radius: 3px;
-  background: #121820;
-}
-.calendar-day {
-  display: block;
-  cursor: default;
-  transition: transform 160ms ease, outline-color 160ms ease;
-}
-.calendar-day:hover {
-  outline: 1px solid rgba(255, 255, 255, 0.75);
-  transform: scale(1.16);
-}
-.calendar-day[data-level="1"],
-.calendar-legend i[data-level="1"] { background: #0e4429; }
-.calendar-day[data-level="2"],
-.calendar-legend i[data-level="2"] { background: #006d32; }
-.calendar-day[data-level="3"],
-.calendar-legend i[data-level="3"] { background: #26a641; }
-.calendar-day[data-level="4"],
-.calendar-legend i[data-level="4"] { background: #39d353; }
-.calendar-legend {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 5px;
-  min-width: 935px;
-  margin-top: 14px;
-  color: #9aa3af;
-  font-size: 14px;
-}
-
 .contact-section { border-top: 1px solid var(--line-soft); }
 .contact-card {
   margin-top: 26px;
@@ -894,8 +762,7 @@ footer {
   }
   .split-section,
   .about-grid,
-  .section-heading,
-  .github-grid {
+  .section-heading {
     grid-template-columns: 1fr;
   }
   .about-section .section-label,
@@ -914,15 +781,6 @@ footer {
   }
   .project-card {
     grid-template-columns: 1fr;
-  }
-  .github-card {
-    height: auto;
-    min-height: 220px;
-    object-fit: contain;
-  }
-  .contribution-heading {
-    align-items: flex-start;
-    flex-direction: column;
   }
   .timeline article {
     grid-template-columns: 1fr;
@@ -1039,8 +897,8 @@ footer {
     overflow-wrap: anywhere;
   }
   .skill-icons span:nth-child(odd):last-child,
-  .skill-icons span:has(img[src*="postman"]),
-  .skill-icons span:has(img[src*="docker"]) {
+  .skill-icons span:has(img[src*="framer"]),
+  .skill-icons span:has(img[src*="gsap"]) {
     grid-column: 1 / -1;
   }
   .menu-panel {
@@ -1056,9 +914,6 @@ footer {
     margin-top: 72px;
   }
   .vertical-email {
-    display: none;
-  }
-  #github {
     display: none;
   }
   footer {

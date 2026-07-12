@@ -63,31 +63,31 @@ const skills = [
 const projects = [
   {
     title: "Insurance Management System",
-    copy: "Laravel/PHP system with authentication, policy management, user modules, and MySQL-backed workflows.",
+    copy: "Laravel/PHP application with authentication, policy workflows, user management, and MySQL-backed operations.",
     tags: ["Laravel", "PHP", "MySQL", "Admin"],
     className: "insurance",
   },
   {
     title: "Job Board",
-    copy: "Learning project covering job posting, routing, forms, authentication, CRUD operations, and database integration.",
+    copy: "Web application covering job posting, routing, forms, authentication, CRUD operations, and database integration.",
     tags: ["Laravel", "CRUD", "Auth", "MySQL"],
     className: "jobs",
   },
   {
     title: "Task Management",
-    copy: "Laravel task tracking application built around routing, form handling, CRUD flows, and MySQL persistence.",
+    copy: "Laravel task tracking application built around routing, form handling, CRUD workflows, and MySQL persistence.",
     tags: ["Laravel", "Tasks", "MySQL", "Panel"],
     className: "tasks",
   },
   {
     title: "Event Management",
-    copy: "Event scheduling project focused on backend practice, form handling, routing, and database-driven records.",
+    copy: "Event scheduling application focused on form handling, routing, backend logic, and database-driven records.",
     tags: ["Laravel", "Events", "Forms", "SQL"],
     className: "events",
   },
   {
     title: "Title Generator with Machine Learning",
-    copy: "Python mini project using TensorFlow, NumPy, Pandas, and Scikit-learn for model building and data processing.",
+    copy: "Python project using TensorFlow, NumPy, Pandas, and Scikit-learn for model building and data processing.",
     tags: ["Python", "TensorFlow", "Pandas", "NumPy"],
     className: "ml",
   },
@@ -96,7 +96,7 @@ const projects = [
 function App() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
-  const { days, total, status } = useGithubContributions();
+  const { days, total } = useGithubContributions();
   const contributionStats = React.useMemo(() => getContributionStats(days, total), [days, total]);
   const shouldReduceMotion = useReducedMotion();
 
@@ -236,8 +236,8 @@ function App() {
               ))}
             </h1>
             <motion.p className="hero-text" variants={revealUp}>
-              Hi! I'm Abu. A backend-focused Software Developer building Laravel, PHP,
-              MySQL, REST API, and web systems for practical business workflows.
+              Hi! I'm Abu, a software developer focused on building reliable web applications,
+              backend systems, REST APIs, and database-driven features.
             </motion.p>
             <motion.div className="hero-actions reference-actions" variants={listReveal}>
               <motion.a className="button primary magnetic" href="#contact" variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }}>Let's Talk <ArrowUpRight size={17} /></motion.a>
@@ -257,7 +257,7 @@ function App() {
       <section id="about" className="section-shell about-section">
         <p className="section-label">About</p>
         <motion.h2 className="about-lead" variants={revealUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
-          I believe in clean backend systems, practical web tools, and reliable API workflows.
+          I believe in building clean, reliable web applications with practical features, solid backend logic, and well-structured API workflows.
         </motion.h2>
         <div className="about-divider">This is me.</div>
         <motion.div className="about-grid" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
@@ -333,23 +333,11 @@ function App() {
         </motion.div>
       </section>
 
-      <section id="github" className="section-shell">
-        <div className="stack-title project-title">
-          <span>*</span>
-          <p>Live GitHub Activity</p>
-        </div>
-        <motion.div className="github-grid" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.18 }}>
-          <motion.img variants={revealUp} className="github-card stats-card" alt="GitHub stats" src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${githubUser}&show_icons=true&theme=dark&hide_border=true&hide_title=true&rank_icon=github&title_color=00F050&text_color=dddddd&icon_color=00F050`} />
-          <motion.img variants={revealUp} className="github-card languages-card" alt="Top languages" src={`https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${githubUser}&layout=compact&theme=dark&hide_border=true&title_color=00F050&text_color=dddddd`} />
-          <ContributionCalendar days={days} total={total} status={status} />
-        </motion.div>
-      </section>
-
       <section id="contact" className="section-shell contact-section">
         <p className="section-label">Contact</p>
         <motion.div className="contact-card" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
-          <motion.h2 variants={revealUp}>Let&apos;s build practical backend systems.</motion.h2>
-          <motion.p variants={revealUp}>Open to software developer roles focused on backend engineering, APIs, databases, and full-stack web development.</motion.p>
+          <motion.h2 variants={revealUp}>Let&apos;s build reliable web applications.</motion.h2>
+          <motion.p variants={revealUp}>Open to software developer roles focused on backend engineering, REST APIs, databases, and full-stack web development.</motion.p>
           <motion.div className="contact-actions" variants={listReveal}>
             <motion.a variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button primary magnetic" href="mailto:mohamedabusubiyanm@gmail.com"><Mail size={17} /> Email Me</motion.a>
             <motion.button variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button secondary magnetic" type="button" onClick={copyEmail}><Copy size={17} /> {copied ? "Copied" : "Copy Email"}</motion.button>
@@ -370,7 +358,6 @@ function App() {
 function useGithubContributions() {
   const [days, setDays] = React.useState<ContributionDay[]>([]);
   const [total, setTotal] = React.useState<number | null>(null);
-  const [status, setStatus] = React.useState("Loading contributions...");
 
   React.useEffect(() => {
     const controller = new AbortController();
@@ -384,16 +371,18 @@ function useGithubContributions() {
         const contributions = data.contributions ?? [];
         setDays(contributions);
         setTotal(data.total?.lastYear ?? contributions.reduce((sum, day) => sum + day.count, 0));
-        setStatus("");
       })
       .catch((error: Error) => {
-        if (error.name !== "AbortError") setStatus("Contribution calendar is temporarily unavailable.");
+        if (error.name !== "AbortError") {
+          setDays([]);
+          setTotal(null);
+        }
       });
 
     return () => controller.abort();
   }, []);
 
-  return { days, total, status };
+  return { days, total };
 }
 
 function getContributionStats(days: ContributionDay[], total: number | null) {
@@ -421,84 +410,6 @@ function getContributionStats(days: ContributionDay[], total: number | null) {
     currentStreak,
     longestStreak,
   };
-}
-
-function ContributionCalendar({ days, total, status }: { days: ContributionDay[]; total: number | null; status: string }) {
-  const weeks = React.useMemo(() => {
-    const grouped: ContributionDay[][] = [];
-    days.forEach((day, index) => {
-      const week = Math.floor(index / 7);
-      if (!grouped[week]) grouped[week] = [];
-      grouped[week].push(day);
-    });
-    return grouped;
-  }, [days]);
-
-  const monthLabels = React.useMemo(() => {
-    const labels: { month: string; column: number }[] = [];
-    let previousMonth = "";
-
-    days.forEach((day, index) => {
-      const date = new Date(`${day.date}T00:00:00`);
-      const month = date.toLocaleDateString(undefined, { month: "short" });
-      if (month !== previousMonth) {
-        labels.push({ month, column: Math.floor(index / 7) + 1 });
-        previousMonth = month;
-      }
-    });
-
-    return labels;
-  }, [days]);
-
-  return (
-    <article className="contribution-card wide">
-      <div className="contribution-heading">
-        <h3>{total?.toLocaleString() ?? "--"} contributions in the last year</h3>
-        <span>Live GitHub contributions</span>
-      </div>
-      {status ? (
-        <p className="contribution-status">{status}</p>
-      ) : (
-        <div className="calendar-shell" aria-label="GitHub contribution calendar">
-          <div className="calendar-months" aria-hidden="true" style={{ gridTemplateColumns: `repeat(${weeks.length}, 13px)` }}>
-            {monthLabels.map(({ month, column }) => (
-              <span key={`${month}-${column}`} style={{ gridColumn: column }}>{month}</span>
-            ))}
-          </div>
-          <div className="calendar-body">
-            <div className="calendar-days" aria-hidden="true">
-              <span>Mon</span>
-              <span>Wed</span>
-              <span>Fri</span>
-            </div>
-            <div className="calendar-grid">
-              {weeks.map((week, weekIndex) => (
-                <div className="calendar-week" key={weekIndex}>
-                  {week.map((day) => (
-                    <span
-                      className="calendar-day"
-                      data-level={day.level}
-                      key={day.date}
-                      title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(day.date).toLocaleDateString(undefined, {
-                        month: "short",
-                        day: "numeric",
-                        year: "numeric",
-                      })}`}
-                    />
-                  ))}
-                </div>
-              ))}
-            </div>
-          </div>
-          <div className="calendar-legend" aria-hidden="true">
-            <span>Less</span>
-            {[0, 1, 2, 3, 4].map((level) => <i data-level={level} key={level} />)}
-            <span>More</span>
-          </div>
-        </div>
-      )}
-    </article>
-  );
 }
 
 function Heading({ label, title }: { label: string; title: string }) {
