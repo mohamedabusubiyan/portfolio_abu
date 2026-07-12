@@ -164,7 +164,7 @@ function App() {
       </motion.div>
 
       <motion.header className="site-header" initial={shouldReduceMotion ? false : { opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.25, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
-        <button className="icon-button menu-button" type="button" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
+        <button className="icon-button menu-button" data-open={menuOpen} type="button" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
           <span />
           <span />
           <span />

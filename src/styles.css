@@ -194,6 +194,11 @@ button { font: inherit; }
   transform: scaleX(1);
   transform-origin: left;
 }
+.menu-button[data-open="true"] {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none;
+}
 .vertical-email {
   position: fixed;
   left: 20px;
@@ -878,7 +883,15 @@ footer {
     margin-left: 0;
     justify-content: flex-start;
   }
-  .hero-stats,
+  .hero-stats {
+    position: static;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+    width: 100%;
+    margin-top: 76px;
+    text-align: center;
+    transform: none;
+  }
   .split-section,
   .about-grid,
   .section-heading,
@@ -920,16 +933,73 @@ footer {
 }
 
 @media (max-width: 680px) {
+  .intro span {
+    width: 100%;
+    max-width: calc(100vw - 40px);
+    padding: 0;
+    font-size: clamp(36px, 11vw, 54px);
+    text-align: center;
+  }
+  .intro span::after {
+    left: 0;
+    right: 0;
+  }
+  .site-header {
+    position: fixed !important;
+    top: 28px !important;
+    right: 22px !important;
+    left: auto !important;
+    z-index: 999 !important;
+    display: flex !important;
+    width: 46px;
+    height: 38px;
+    padding: 0;
+    background: transparent;
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    pointer-events: auto;
+  }
+  .menu-button {
+    width: 42px;
+    height: 34px;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
+  .menu-button span {
+    width: 34px;
+    height: 2px;
+    background: #f2f2f2 !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+  }
   .section-shell {
     width: min(100% - 28px, 1360px);
     padding: 82px 0;
   }
   .hero {
-    padding-top: 108px;
+    display: block;
+    min-height: auto;
+    padding-top: 82px;
+    padding-bottom: 42px;
+  }
+  .hero-copy {
+    margin-left: 0;
   }
   .hero h1 {
-    font-size: clamp(58px, 17vw, 92px);
+    max-width: 100%;
+    font-size: clamp(48px, 13.5vw, 64px);
     letter-spacing: -0.07em;
+  }
+  .hero-text {
+    max-width: 100%;
+    margin-top: 18px;
+    font-size: clamp(16px, 4.8vw, 20px);
+    line-height: 1.4;
+  }
+  .hero-actions {
+    gap: 12px;
+    margin-top: 24px;
   }
   .hero-actions,
   .contact-actions {
@@ -939,11 +1009,39 @@ footer {
   .button {
     width: 100%;
   }
+  .hero-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 30px;
+  }
   .hero-stats article {
-    min-height: 190px;
+    min-height: 0;
+    gap: 10px;
+  }
+  .hero-stats strong {
+    font-size: 36px;
+  }
+  .hero-stats span {
+    font-size: 14px;
+    line-height: 1.35;
   }
   .skill-icons {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px 22px;
+  }
+  .skill-icons span {
+    min-width: 0;
+    font-size: clamp(18px, 5.6vw, 28px);
+    line-height: 1.1;
+    white-space: normal;
+  }
+  .skill-icons span:has(img[alt=""]) {
+    overflow-wrap: anywhere;
+  }
+  .skill-icons span:nth-child(odd):last-child,
+  .skill-icons span:has(img[src*="postman"]),
+  .skill-icons span:has(img[src*="docker"]) {
+    grid-column: 1 / -1;
   }
   .menu-panel {
     width: 100vw;
@@ -958,6 +1056,9 @@ footer {
     margin-top: 72px;
   }
   .vertical-email {
+    display: none;
+  }
+  #github {
     display: none;
   }
   footer {
