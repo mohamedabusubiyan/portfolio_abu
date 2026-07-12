@@ -6,6 +6,21 @@ import "./styles.css";
 
 const githubUser = "mohamedabusubiyan";
 const resumeHref = "/MOHAMED%20ABU%20SUBIYAN%20M%20-%20Tech.pdf";
+const contributionsApi = `https://github-contributions-api.jogruber.de/v4/${githubUser}?y=last`;
+
+type ContributionDay = {
+  date: string;
+  count: number;
+  level: number;
+};
+
+type ContributionApiResponse = {
+  total?: {
+    lastYear?: number;
+    [year: string]: number | undefined;
+  };
+  contributions?: ContributionDay[];
+};
 
 const skills = [
   {
@@ -46,8 +61,8 @@ const skills = [
 const projects = [
   {
     title: "Insurance Management System",
-    copy: "Laravel/PHP system with authentication, policy management, admin dashboard, user modules, and MySQL-backed workflows.",
-    tags: ["Laravel", "PHP", "MySQL", "Dashboard"],
+    copy: "Laravel/PHP system with authentication, policy management, user modules, and MySQL-backed workflows.",
+    tags: ["Laravel", "PHP", "MySQL", "Admin"],
     className: "insurance",
   },
   {
@@ -79,6 +94,8 @@ const projects = [
 function App() {
   const [menuOpen, setMenuOpen] = React.useState(false);
   const [copied, setCopied] = React.useState(false);
+  const { days, total, status } = useGithubContributions();
+  const contributionStats = React.useMemo(() => getContributionStats(days, total), [days, total]);
 
   React.useEffect(() => {
     const onMove = (event: PointerEvent) => {
@@ -171,7 +188,7 @@ function App() {
             </h1>
             <p className="hero-text">
               Hi! I'm Abu. A backend-focused Software Developer building Laravel, PHP,
-              MySQL, REST API, and dashboard systems for practical business workflows.
+              MySQL, REST API, and web systems for practical business workflows.
             </p>
             <div className="hero-actions reference-actions">
               <a className="button primary" href="#contact">Let's Talk <ArrowUpRight size={17} /></a>
@@ -182,29 +199,29 @@ function App() {
         </div>
 
         <motion.div className="hero-stats" initial={{ opacity: 0, x: 30 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 2.55, duration: 0.7 }}>
-          <article><strong>1.6k+</strong><span>Total Contributions</span></article>
-          <article><strong>5</strong><span>Current Streak</span></article>
-          <article><strong>16</strong><span>Longest Streak</span></article>
+          <article><strong>{contributionStats.totalLabel}</strong><span>Total Contributions</span></article>
+          <article><strong>{contributionStats.currentStreak}</strong><span>Current Streak</span></article>
+          <article><strong>{contributionStats.longestStreak}</strong><span>Longest Streak</span></article>
         </motion.div>
       </section>
 
       <section id="about" className="section-shell about-section">
         <p className="section-label">About</p>
         <motion.h2 className="about-lead" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          I believe in clean backend systems, practical dashboards, and reliable API workflows.
+          I believe in clean backend systems, practical web tools, and reliable API workflows.
         </motion.h2>
         <div className="about-divider">This is me.</div>
         <motion.div className="about-grid" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h3>Hi, I'm Abu.</h3>
           <div>
             <p>
-              I'm a software developer focused on turning business workflows into
-              practical Laravel, PHP, MySQL, and REST API solutions.
+              I'm a software developer focused on building reliable web applications,
+              clean backend logic, and practical features that are easy to maintain.
             </p>
             <p>
-              My work includes internal dashboards, panel management systems,
-              authentication, CRUD features, database operations, API routes,
-              Docker-based development, and Git workflows.
+              I work across application development, authentication, CRUD flows,
+              database design, API integration, debugging, deployment preparation,
+              and collaborative Git-based development.
             </p>
           </div>
         </motion.div>
@@ -236,7 +253,7 @@ function App() {
         <p className="section-label">Experience</p>
         <div className="timeline">
           <Experience date="Sep 2025 - Present" title="Software Developer" company="DropTruck, WeHaul Logistics Pvt Ltd, Chennai" points={[
-            "Working on backend and frontend development for internal dashboard and panel management systems.",
+            "Working on backend and frontend development for internal tools and panel management systems.",
             "Developing Laravel-based web applications with MySQL database integration.",
             "Implementing REST APIs, API routes, authentication, CRUD operations, and workflow-based features.",
             "Using Git, GitHub, Postman, and Docker in development and testing workflows.",
@@ -273,9 +290,9 @@ function App() {
           <p>Live GitHub Activity</p>
         </div>
         <div className="github-grid">
-          <img alt="GitHub stats" src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${githubUser}&show_icons=true&theme=dark&hide_border=true&title_color=C8FF4D&text_color=dddddd&icon_color=C8FF4D`} />
-          <img alt="Top languages" src={`https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${githubUser}&layout=compact&theme=dark&hide_border=true&title_color=C8FF4D&text_color=dddddd`} />
-          <img className="wide" alt="Contribution graph" src={`https://github-readme-activity-graph.vercel.app/graph?username=${githubUser}&theme=github-dark&hide_border=true&color=C8FF4D&line=C8FF4D&point=ffffff&area=true&area_color=C8FF4D`} />
+          <img className="github-card stats-card" alt="GitHub stats" src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${githubUser}&show_icons=true&theme=dark&hide_border=true&hide_title=true&rank_icon=github&title_color=00F050&text_color=dddddd&icon_color=00F050`} />
+          <img className="github-card languages-card" alt="Top languages" src={`https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${githubUser}&layout=compact&theme=dark&hide_border=true&title_color=00F050&text_color=dddddd`} />
+          <ContributionCalendar days={days} total={total} status={status} />
         </div>
       </section>
 
@@ -283,7 +300,7 @@ function App() {
         <p className="section-label">Contact</p>
         <motion.div className="contact-card" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
           <h2>Let&apos;s build practical backend systems.</h2>
-          <p>Open to software developer roles focused on Laravel, PHP, REST APIs, MySQL, dashboards, and full-stack web development.</p>
+          <p>Open to software developer roles focused on backend engineering, APIs, databases, and full-stack web development.</p>
           <div className="contact-actions">
             <a className="button primary" href="mailto:mohamedabusubiyanm@gmail.com"><Mail size={17} /> Email Me</a>
             <button className="button secondary" type="button" onClick={copyEmail}><Copy size={17} /> {copied ? "Copied" : "Copy Email"}</button>
@@ -298,6 +315,140 @@ function App() {
         <span>Tirunelveli, Tamil Nadu</span>
       </footer>
     </main>
+  );
+}
+
+function useGithubContributions() {
+  const [days, setDays] = React.useState<ContributionDay[]>([]);
+  const [total, setTotal] = React.useState<number | null>(null);
+  const [status, setStatus] = React.useState("Loading contributions...");
+
+  React.useEffect(() => {
+    const controller = new AbortController();
+
+    fetch(contributionsApi, { signal: controller.signal })
+      .then((response) => {
+        if (!response.ok) throw new Error("Unable to load GitHub contributions.");
+        return response.json() as Promise<ContributionApiResponse>;
+      })
+      .then((data) => {
+        const contributions = data.contributions ?? [];
+        setDays(contributions);
+        setTotal(data.total?.lastYear ?? contributions.reduce((sum, day) => sum + day.count, 0));
+        setStatus("");
+      })
+      .catch((error: Error) => {
+        if (error.name !== "AbortError") setStatus("Contribution calendar is temporarily unavailable.");
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  return { days, total, status };
+}
+
+function getContributionStats(days: ContributionDay[], total: number | null) {
+  const totalCount = total ?? days.reduce((sum, day) => sum + day.count, 0);
+  let currentStreak = 0;
+  let longestStreak = 0;
+  let runningStreak = 0;
+
+  days.forEach((day) => {
+    if (day.count > 0) {
+      runningStreak += 1;
+      longestStreak = Math.max(longestStreak, runningStreak);
+    } else {
+      runningStreak = 0;
+    }
+  });
+
+  for (let index = days.length - 1; index >= 0; index -= 1) {
+    if (days[index].count === 0) break;
+    currentStreak += 1;
+  }
+
+  return {
+    totalLabel: totalCount > 999 ? `${(totalCount / 1000).toFixed(1)}k+` : totalCount.toLocaleString(),
+    currentStreak,
+    longestStreak,
+  };
+}
+
+function ContributionCalendar({ days, total, status }: { days: ContributionDay[]; total: number | null; status: string }) {
+  const weeks = React.useMemo(() => {
+    const grouped: ContributionDay[][] = [];
+    days.forEach((day, index) => {
+      const week = Math.floor(index / 7);
+      if (!grouped[week]) grouped[week] = [];
+      grouped[week].push(day);
+    });
+    return grouped;
+  }, [days]);
+
+  const monthLabels = React.useMemo(() => {
+    const labels: { month: string; column: number }[] = [];
+    let previousMonth = "";
+
+    days.forEach((day, index) => {
+      const date = new Date(`${day.date}T00:00:00`);
+      const month = date.toLocaleDateString(undefined, { month: "short" });
+      if (month !== previousMonth) {
+        labels.push({ month, column: Math.floor(index / 7) + 1 });
+        previousMonth = month;
+      }
+    });
+
+    return labels;
+  }, [days]);
+
+  return (
+    <article className="contribution-card wide">
+      <div className="contribution-heading">
+        <h3>{total?.toLocaleString() ?? "--"} contributions in the last year</h3>
+        <span>Live GitHub contributions</span>
+      </div>
+      {status ? (
+        <p className="contribution-status">{status}</p>
+      ) : (
+        <div className="calendar-shell" aria-label="GitHub contribution calendar">
+          <div className="calendar-months" aria-hidden="true" style={{ gridTemplateColumns: `repeat(${weeks.length}, 13px)` }}>
+            {monthLabels.map(({ month, column }) => (
+              <span key={`${month}-${column}`} style={{ gridColumn: column }}>{month}</span>
+            ))}
+          </div>
+          <div className="calendar-body">
+            <div className="calendar-days" aria-hidden="true">
+              <span>Mon</span>
+              <span>Wed</span>
+              <span>Fri</span>
+            </div>
+            <div className="calendar-grid">
+              {weeks.map((week, weekIndex) => (
+                <div className="calendar-week" key={weekIndex}>
+                  {week.map((day) => (
+                    <span
+                      className="calendar-day"
+                      data-level={day.level}
+                      key={day.date}
+                      title={`${day.count} contribution${day.count === 1 ? "" : "s"} on ${new Date(day.date).toLocaleDateString(undefined, {
+                        month: "short",
+                        day: "numeric",
+                        year: "numeric",
+                      })}`}
+                    />
+                  ))}
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="calendar-legend" aria-hidden="true">
+            <span>Less</span>
+            {[0, 1, 2, 3, 4].map((level) => <i data-level={level} key={level} />)}
+            <span>More</span>
+          </div>
+        </div>
+      )}
+    </article>
   );
 }
 
