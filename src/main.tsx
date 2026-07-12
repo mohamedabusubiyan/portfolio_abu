@@ -1,12 +1,14 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { ArrowUpRight, Copy, Download, Github, Linkedin, Mail, X } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import "./styles.css";
 
 const githubUser = "mohamedabusubiyan";
 const resumeHref = "/MOHAMED%20ABU%20SUBIYAN%20M%20-%20Tech.pdf";
 const contributionsApi = `https://github-contributions-api.jogruber.de/v4/${githubUser}?y=last`;
+const heroWords = ["Software", "Developer"];
+const introPanels = Array.from({ length: 24 }, (_, index) => index);
 
 type ContributionDay = {
   date: string;
@@ -96,6 +98,22 @@ function App() {
   const [copied, setCopied] = React.useState(false);
   const { days, total, status } = useGithubContributions();
   const contributionStats = React.useMemo(() => getContributionStats(days, total), [days, total]);
+  const shouldReduceMotion = useReducedMotion();
+
+  const revealUp = {
+    hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 28 },
+    show: { opacity: 1, y: 0, transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] } },
+  };
+
+  const listReveal = {
+    hidden: {},
+    show: {
+      transition: {
+        staggerChildren: shouldReduceMotion ? 0 : 0.08,
+        delayChildren: shouldReduceMotion ? 0 : 0.08,
+      },
+    },
+  };
 
   React.useEffect(() => {
     const onMove = (event: PointerEvent) => {
@@ -118,22 +136,40 @@ function App() {
       <div className="star-field" aria-hidden="true" />
       <motion.div
         className="intro"
-        initial={{ y: 0 }}
-        animate={{ y: "-100%" }}
-        transition={{ delay: 1.7, duration: 0.9, ease: [0.76, 0, 0.24, 1] }}
+        initial={{ opacity: 1 }}
+        animate={{ opacity: 0, pointerEvents: "none" }}
+        transition={{ delay: shouldReduceMotion ? 0.2 : 1.75, duration: shouldReduceMotion ? 0.2 : 0.25 }}
       >
-        <motion.span initial={{ y: 42, opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: 0.65 }}>
-          Mohamed Abu Subiyan M
+        <motion.span
+          initial={{ y: 42, opacity: 0, clipPath: "inset(0 100% 0 0)" }}
+          animate={{ y: 0, opacity: 1, clipPath: "inset(0 0% 0 0)" }}
+          transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
+        >
+          Abu Subiyan
         </motion.span>
+        <div className="intro-grid" aria-hidden="true">
+          {introPanels.map((panel) => (
+            <motion.i
+              key={panel}
+              initial={{ x: 0, y: 0 }}
+              animate={shouldReduceMotion ? { opacity: 0 } : panel % 4 === 0 ? { y: "-102%" } : panel % 4 === 1 ? { x: "102%" } : panel % 4 === 2 ? { y: "102%" } : { x: "-102%" }}
+              transition={{
+                delay: shouldReduceMotion ? 0 : 0.82 + (panel % 8) * 0.045,
+                duration: shouldReduceMotion ? 0.2 : 1.05,
+                ease: [0.16, 1, 0.3, 1],
+              }}
+            />
+          ))}
+        </div>
       </motion.div>
 
-      <header className="site-header">
+      <motion.header className="site-header" initial={shouldReduceMotion ? false : { opacity: 0, y: -18 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.25, duration: 0.75, ease: [0.16, 1, 0.3, 1] }}>
         <button className="icon-button menu-button" type="button" aria-label="Toggle menu" onClick={() => setMenuOpen(!menuOpen)}>
           <span />
           <span />
           <span />
         </button>
-      </header>
+      </motion.header>
 
       <a className="vertical-email" href="mailto:mohamedabusubiyanm@gmail.com">mohamedabusubiyanm@gmail.com</a>
 
@@ -181,20 +217,33 @@ function App() {
 
       <section id="home" className="hero section-shell">
         <div className="hero-grid">
-          <motion.div className="hero-copy" initial={{ opacity: 0, y: 44 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 2.05, duration: 0.8 }}>
+          <motion.div className="hero-copy" initial="hidden" animate="show" variants={listReveal}>
             <h1>
-              <motion.span initial={{ y: 150 }} animate={{ y: 0 }} transition={{ delay: 2.15, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}>Backend</motion.span>
-              <motion.span initial={{ y: 150 }} animate={{ y: 0 }} transition={{ delay: 2.28, duration: 0.95, ease: [0.22, 1, 0.36, 1] }}>Developer</motion.span>
+              {heroWords.map((word) => (
+                <span key={word}>
+                  {word.split("").map((letter, index) => (
+                    <motion.i
+                      key={`${word}-${letter}-${index}`}
+                      variants={{
+                        hidden: shouldReduceMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 },
+                        show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] } },
+                      }}
+                    >
+                      {letter}
+                    </motion.i>
+                  ))}
+                </span>
+              ))}
             </h1>
-            <p className="hero-text">
+            <motion.p className="hero-text" variants={revealUp}>
               Hi! I'm Abu. A backend-focused Software Developer building Laravel, PHP,
               MySQL, REST API, and web systems for practical business workflows.
-            </p>
-            <div className="hero-actions reference-actions">
-              <a className="button primary" href="#contact">Let's Talk <ArrowUpRight size={17} /></a>
-              <a className="button secondary" href={resumeHref} download><Download size={17} /> Resume</a>
-              <div className="availability"><span /> Available for full-time opportunities</div>
-            </div>
+            </motion.p>
+            <motion.div className="hero-actions reference-actions" variants={listReveal}>
+              <motion.a className="button primary magnetic" href="#contact" variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }}>Let's Talk <ArrowUpRight size={17} /></motion.a>
+              <motion.a className="button secondary magnetic" href={resumeHref} download variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }}><Download size={17} /> Resume</motion.a>
+              <motion.div className="availability" variants={revealUp}><span /> Available for full-time opportunities</motion.div>
+            </motion.div>
           </motion.div>
         </div>
 
@@ -207,13 +256,13 @@ function App() {
 
       <section id="about" className="section-shell about-section">
         <p className="section-label">About</p>
-        <motion.h2 className="about-lead" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+        <motion.h2 className="about-lead" variants={revealUp} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.35 }}>
           I believe in clean backend systems, practical web tools, and reliable API workflows.
         </motion.h2>
         <div className="about-divider">This is me.</div>
-        <motion.div className="about-grid" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h3>Hi, I'm Abu.</h3>
-          <div>
+        <motion.div className="about-grid" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+          <motion.h3 variants={revealUp}>Hi, I'm Abu.</motion.h3>
+          <motion.div variants={revealUp}>
             <p>
               I'm a software developer focused on building reliable web applications,
               clean backend logic, and practical features that are easy to maintain.
@@ -223,7 +272,7 @@ function App() {
               database design, API integration, debugging, deployment preparation,
               and collaborative Git-based development.
             </p>
-          </div>
+          </motion.div>
         </motion.div>
       </section>
 
@@ -232,9 +281,9 @@ function App() {
           <span>*</span>
           <p>My Stack</p>
         </div>
-        <div className="stack-list">
+        <motion.div className="stack-list" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
           {skills.map(({ group, items }) => (
-            <motion.article key={group} className="stack-row" initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
+            <motion.article key={group} className="stack-row" variants={revealUp}>
               <h3>{group}</h3>
               <div className="skill-icons">
                 {items.map(([item, icon]) => (
@@ -246,12 +295,12 @@ function App() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       <section id="experience" className="section-shell split-section">
         <p className="section-label">Experience</p>
-        <div className="timeline">
+        <motion.div className="timeline" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
           <Experience date="Sep 2025 - Present" title="Software Developer" company="DropTruck, WeHaul Logistics Pvt Ltd, Chennai" points={[
             "Working on backend and frontend development for internal tools and panel management systems.",
             "Developing Laravel-based web applications with MySQL database integration.",
@@ -262,7 +311,7 @@ function App() {
             "Worked with HTML, CSS, and Angular for responsive web application development.",
             "Improved frontend debugging, component-based development, and UI implementation skills.",
           ]} />
-        </div>
+        </motion.div>
       </section>
 
       <section id="work" className="section-shell">
@@ -270,9 +319,9 @@ function App() {
           <span>*</span>
           <p>Selected Projects</p>
         </div>
-        <div className="project-list">
+        <motion.div className="project-list" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.16 }}>
           {projects.map((project, index) => (
-            <motion.article className="project-card" key={project.title} initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} whileHover={{ x: 8 }}>
+            <motion.article className="project-card" key={project.title} variants={revealUp} whileHover={shouldReduceMotion ? undefined : { y: -6, scale: 1.02 }}>
               <div className="project-index">{String(index + 1).padStart(2, "0")}</div>
               <div>
                 <h3>{project.title}</h3>
@@ -281,7 +330,7 @@ function App() {
               </div>
             </motion.article>
           ))}
-        </div>
+        </motion.div>
       </section>
 
       <section id="github" className="section-shell">
@@ -289,24 +338,24 @@ function App() {
           <span>*</span>
           <p>Live GitHub Activity</p>
         </div>
-        <div className="github-grid">
-          <img className="github-card stats-card" alt="GitHub stats" src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${githubUser}&show_icons=true&theme=dark&hide_border=true&hide_title=true&rank_icon=github&title_color=00F050&text_color=dddddd&icon_color=00F050`} />
-          <img className="github-card languages-card" alt="Top languages" src={`https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${githubUser}&layout=compact&theme=dark&hide_border=true&title_color=00F050&text_color=dddddd`} />
+        <motion.div className="github-grid" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.18 }}>
+          <motion.img variants={revealUp} className="github-card stats-card" alt="GitHub stats" src={`https://github-readme-stats-sigma-five.vercel.app/api?username=${githubUser}&show_icons=true&theme=dark&hide_border=true&hide_title=true&rank_icon=github&title_color=00F050&text_color=dddddd&icon_color=00F050`} />
+          <motion.img variants={revealUp} className="github-card languages-card" alt="Top languages" src={`https://github-readme-stats-sigma-five.vercel.app/api/top-langs/?username=${githubUser}&layout=compact&theme=dark&hide_border=true&title_color=00F050&text_color=dddddd`} />
           <ContributionCalendar days={days} total={total} status={status} />
-        </div>
+        </motion.div>
       </section>
 
       <section id="contact" className="section-shell contact-section">
         <p className="section-label">Contact</p>
-        <motion.div className="contact-card" initial={{ opacity: 0, y: 34 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>
-          <h2>Let&apos;s build practical backend systems.</h2>
-          <p>Open to software developer roles focused on backend engineering, APIs, databases, and full-stack web development.</p>
-          <div className="contact-actions">
-            <a className="button primary" href="mailto:mohamedabusubiyanm@gmail.com"><Mail size={17} /> Email Me</a>
-            <button className="button secondary" type="button" onClick={copyEmail}><Copy size={17} /> {copied ? "Copied" : "Copy Email"}</button>
-            <a className="button secondary" href="https://github.com/mohamedabusubiyan" target="_blank" rel="noreferrer"><Github size={17} /> GitHub</a>
-            <a className="button secondary" href="https://www.linkedin.com/in/mohamed-abu-subiyan-m-260509288" target="_blank" rel="noreferrer"><Linkedin size={17} /> LinkedIn</a>
-          </div>
+        <motion.div className="contact-card" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
+          <motion.h2 variants={revealUp}>Let&apos;s build practical backend systems.</motion.h2>
+          <motion.p variants={revealUp}>Open to software developer roles focused on backend engineering, APIs, databases, and full-stack web development.</motion.p>
+          <motion.div className="contact-actions" variants={listReveal}>
+            <motion.a variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button primary magnetic" href="mailto:mohamedabusubiyanm@gmail.com"><Mail size={17} /> Email Me</motion.a>
+            <motion.button variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button secondary magnetic" type="button" onClick={copyEmail}><Copy size={17} /> {copied ? "Copied" : "Copy Email"}</motion.button>
+            <motion.a variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button secondary magnetic" href="https://github.com/mohamedabusubiyan" target="_blank" rel="noreferrer"><Github size={17} /> GitHub</motion.a>
+            <motion.a variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button secondary magnetic" href="https://www.linkedin.com/in/mohamed-abu-subiyan-m-260509288" target="_blank" rel="noreferrer"><Linkedin size={17} /> LinkedIn</motion.a>
+          </motion.div>
         </motion.div>
       </section>
 

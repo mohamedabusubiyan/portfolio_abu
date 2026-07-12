@@ -43,32 +43,51 @@ button { font: inherit; }
   display: grid;
   place-items: center;
   overflow: hidden;
-  background: #222222;
-}
-.intro::after {
-  position: absolute;
-  inset: auto 0 0;
-  height: 1px;
-  content: "";
-  background: var(--accent);
-  transform-origin: left;
-  animation: introLine 1.2s ease forwards;
+  background: #000000;
 }
 .intro span {
+  position: relative;
+  z-index: 2;
   display: block;
   max-width: 980px;
   padding: 0 22px;
-  color: var(--accent);
+  color: white;
   font-size: clamp(44px, 9vw, 138px);
   font-weight: 900;
-  letter-spacing: -0.04em;
+  letter-spacing: 0;
   line-height: 0.86;
   text-align: center;
   text-transform: uppercase;
+  white-space: nowrap;
 }
-@keyframes introLine {
-  from { transform: scaleX(0); }
+.intro span::after {
+  position: absolute;
+  left: 22px;
+  right: 22px;
+  bottom: -16px;
+  height: 2px;
+  content: "";
+  background: white;
+  opacity: 0.82;
+  transform: scaleX(0);
+  transform-origin: left;
+  animation: introNameLine 0.82s 0.18s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes introNameLine {
   to { transform: scaleX(1); }
+}
+.intro-grid {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  pointer-events: none;
+}
+.intro-grid i {
+  display: block;
+  background: #000000;
 }
 
 .cursor-glow {
@@ -156,6 +175,25 @@ button { font: inherit; }
 .icon-button:hover span:nth-child(3) {
   transform: translateX(-6px);
 }
+.menu-button {
+  position: relative;
+}
+.menu-button::after {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -8px;
+  height: 1px;
+  content: "";
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 260ms ease;
+}
+.menu-button:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
 .vertical-email {
   position: fixed;
   left: 20px;
@@ -241,10 +279,13 @@ button { font: inherit; }
 .hero {
   min-height: 100vh;
   position: relative;
-  padding-top: clamp(210px, 31vh, 286px);
+  display: flex;
+  align-items: center;
+  padding-top: clamp(108px, 14vh, 150px);
+  padding-bottom: clamp(90px, 10vh, 130px);
 }
 .hero-copy {
-  margin-left: clamp(0px, 6.2vw, 120px);
+  margin-left: clamp(0px, 2vw, 38px);
 }
 .hero-grid {
   display: block;
@@ -272,8 +313,14 @@ h1, h2, h3, p { margin-top: 0; }
   text-transform: uppercase;
 }
 .hero h1 span {
-  display: block;
+  display: flex;
   color: white;
+  overflow: hidden;
+}
+.hero h1 i {
+  display: inline-block;
+  font-style: normal;
+  will-change: transform, opacity;
 }
 .hero h1 span:last-child {
   color: #e0e0e0;
@@ -314,6 +361,9 @@ h1, h2, h3, p { margin-top: 0; }
   transition: background 180ms ease, color 180ms ease, transform 180ms ease;
 }
 .button:hover { transform: translateY(-2px); }
+.magnetic {
+  will-change: transform;
+}
 .button.primary {
   border-color: var(--accent);
   background: var(--accent);
@@ -337,10 +387,11 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-stats {
   position: absolute;
   right: clamp(-240px, -12vw, -120px);
-  top: 47%;
+  top: 50%;
   display: grid;
-  gap: 44px;
+  gap: 34px;
   text-align: right;
+  transform: translateY(-50%);
 }
 .hero-stats article {
   display: grid;
@@ -604,6 +655,10 @@ h1, h2, h3, p { margin-top: 0; }
   align-items: start;
   border-bottom: 1px solid var(--line-soft);
   padding: 20px 0 18px;
+  transition: box-shadow 220ms ease;
+}
+.project-card:hover {
+  box-shadow: 0 18px 48px rgba(0, 240, 80, 0.08);
 }
 .project-index {
   color: #bdbdbd;
@@ -908,5 +963,16 @@ footer {
   footer {
     flex-direction: column;
     gap: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.001ms !important;
   }
 }
