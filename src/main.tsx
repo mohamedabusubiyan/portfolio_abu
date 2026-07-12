@@ -52,6 +52,9 @@ const skills = [
   {
     group: "Tools",
     items: [
+      ["VS Code", "https://skillicons.dev/icons?i=vscode"],
+      ["PhpStorm", "https://skillicons.dev/icons?i=phpstorm"],
+      ["Android Studio", "https://skillicons.dev/icons?i=androidstudio"],
       ["Git", "https://skillicons.dev/icons?i=git"],
       ["Docker", "https://skillicons.dev/icons?i=docker"],
       ["Postman", "https://skillicons.dev/icons?i=postman"],
