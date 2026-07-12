@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import "./styles.css";
 
 const githubUser = "mohamedabusubiyan";
-const resumeHref = "/MOHAMED%20ABU%20SUBIYAN%20M%20-%20Tech.pdf";
+const resumeHref = `${import.meta.env.BASE_URL}MOHAMED%20ABU%20SUBIYAN%20M%20-%20Tech.pdf`;
 const contributionsApi = `https://github-contributions-api.jogruber.de/v4/${githubUser}?y=last`;
 const heroWords = ["Software", "Developer"];
 const introPanels = Array.from({ length: 24 }, (_, index) => index);
