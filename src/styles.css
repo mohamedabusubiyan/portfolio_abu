@@ -306,7 +306,7 @@ h1, h2, h3, p { margin-top: 0; }
   overflow: hidden;
   color: white;
   font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
-  font-size: clamp(88px, 8.8vw, 132px);
+  font-size: clamp(76px, 7vw, 108px);
   font-weight: 400;
   letter-spacing: 0;
   line-height: 0.86;
@@ -329,10 +329,10 @@ h1, h2, h3, p { margin-top: 0; }
   color: var(--accent);
 }
 .hero-text {
-  max-width: 670px;
-  margin: 32px 0 0;
+  max-width: 610px;
+  margin: 28px 0 0;
   color: var(--soft);
-  font-size: clamp(20px, 1.7vw, 25px);
+  font-size: clamp(18px, 1.38vw, 22px);
   line-height: 1.46;
 }
 .hero-actions {
@@ -341,7 +341,7 @@ h1, h2, h3, p { margin-top: 0; }
   align-items: center;
   justify-content: flex-start;
   gap: 18px;
-  margin-top: 34px;
+  margin-top: 30px;
 }
 .button {
   display: inline-flex;
@@ -400,13 +400,13 @@ h1, h2, h3, p { margin-top: 0; }
 .hero-stats strong {
   color: var(--accent);
   font-family: "Bebas Neue", Impact, "Arial Narrow", sans-serif;
-  font-size: 58px;
+  font-size: 50px;
   font-weight: 400;
   line-height: 0.85;
 }
 .hero-stats span {
   color: #d6d6d6;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .split-section {
@@ -928,7 +928,7 @@ footer {
     padding-top: 108px;
   }
   .hero h1 {
-    font-size: clamp(62px, 19vw, 110px);
+    font-size: clamp(58px, 17vw, 92px);
     letter-spacing: -0.07em;
   }
   .hero-actions,
