@@ -1,0 +1,86 @@
+MOHAMED ABU SUBIYAN M
+Chennai, Tamil Nadu
+Preferred Locations: Chennai, Bangalore
+Phone: +91 7339069595
+Email: mohamedabusubiyanm@gmail.com
+LinkedIn: https://www.linkedin.com/in/mohamed-abu-subiyan-m-260509288
+GitHub: https://github.com/mohamedabusubiyan
+Portfolio: https://mohamedabusubiyan.github.io/portfolio_abu/
+
+PROFESSIONAL SUMMARY
+
+Backend Developer skilled in PHP, Laravel, Python, SQL, and REST APIs, with experience in web application development, database management, automation, and production support. Proficient in MySQL, PostgreSQL, Docker, Git, Linux, Nginx, SSH, DigitalOcean, and AWS S3, with additional experience in Kotlin and XML for Android development.
+
+SKILLS
+
+Languages: PHP, Python, Kotlin, SQL, HTML, CSS, XML
+Frameworks: Laravel, Blade
+APIs: REST APIs, API Integration
+Automation: n8n, Workflow Automation
+Database: MySQL, PostgreSQL
+Cloud: DigitalOcean, AWS S3
+Server: Linux, Nginx, SSH, Server Administration, Troubleshooting
+Tools: Git, GitHub, Docker, Postman, VS Code, PhpStorm, Android Studio
+
+WORK EXPERIENCE
+
+ASSOCIATE SOFTWARE DEVELOPER
+DropTruck - WeHaul Logistics Pvt Ltd
+Chennai, Tamil Nadu | Dec 2025 - Current
+
+- Developing and maintaining Laravel/PHP-based applications and product modules for internal business workflows.
+- Working with MySQL, REST APIs, PHP scripts, database operations, and business logic implementation.
+- Building n8n automation workflows and API integrations to support operational processes.
+- Contributed to banking payment APIs, implementing payment workflows and transaction processing.
+- Worked on AI voice call modules for customer support and AWS S3 for file storage.
+- Managing Linux servers through SSH for application deployment, website and database maintenance, log monitoring, file management, permissions, and troubleshooting.
+
+SOFTWARE DEVELOPER INTERN
+DropTruck - WeHaul Logistics Pvt Ltd
+Chennai, Tamil Nadu | Sep 2025 - Nov 2025
+
+- Worked on PHP and Laravel-based application modules and projects.
+- Implemented CRUD operations, authentication, routing, and MySQL database integration.
+- Gained hands-on experience with REST APIs, backend workflows, debugging, and Git.
+
+WEB DEVELOPMENT INTERN
+Brassy Academy
+Tirunelveli, Tamil Nadu | Feb 2023
+
+- Worked with HTML, CSS, and Angular for responsive web application development.
+- Improved frontend debugging, component-based development, and UI implementation skills.
+
+PROJECTS
+
+Insurance Management System
+- Developed a web-based Insurance Management System using Laravel/PHP, MySQL, HTML, and CSS.
+- Implemented authentication, policy management, admin dashboard, and database-driven workflows.
+- Built modules for managing users, policies, and application workflows.
+
+Job Board, Task Management, and Event Management
+- Developed multiple Laravel-based applications as part of backend development learning and practice.
+- Implemented authentication, CRUD operations, routing, form handling, and MySQL integration.
+- Built features for job posting, task tracking, and event scheduling.
+
+Title Generator with Machine Learning
+- Python project using TensorFlow, NumPy, Pandas, and Scikit-learn for model building and data processing.
+
+EDUCATION
+
+Bachelor of Engineering - Computer Science
+PET Engineering College
+Tirunelveli, Tamil Nadu | 2021 - 2025 | CGPA: 8/10
+
+HSSLC Board Exam
+Government Higher Secondary School
+Tirunelveli, Tamil Nadu | 2021 | 88%
+
+CERTIFICATIONS
+
+- Laravel & PHP Mastery: Build 5 Real-World Projects - Udemy | Sep 2025
+- Python for Everybody Specialization - University of Michigan, Coursera | Sep 2026
+
+LANGUAGES
+
+- English
+- Tamil
