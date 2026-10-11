@@ -63,7 +63,7 @@ const skills = [
   {
     group: "Cloud & Server",
     items: [
-      ["DigitalOcean", "https://skillicons.dev/icons?i=digitalocean"],
+      ["DigitalOcean", "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/digitalocean/digitalocean-original.svg"],
       ["AWS S3", "https://skillicons.dev/icons?i=aws"],
       ["Linux", "https://skillicons.dev/icons?i=linux"],
       ["Nginx", "https://skillicons.dev/icons?i=nginx"],
