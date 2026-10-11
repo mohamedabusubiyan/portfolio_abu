@@ -1,97 +1,139 @@
-# vinext-starter
+# Mohamed Abu Subiyan M
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+Software developer focused on backend engineering, Laravel/PHP applications,
+REST APIs, automation workflows, database-driven features, and production
+support.
 
-## Prerequisites
+Portfolio: [mohamedabusubiyan.github.io/portfolio_abu](https://mohamedabusubiyan.github.io/portfolio_abu/)  
+Email: [mohamedabusubiyanm@gmail.com](mailto:mohamedabusubiyanm@gmail.com)  
+Location: Chennai, Tamil Nadu  
+Preferred locations: Chennai, Bangalore
 
-- Node.js `>=22.13.0`
+## Professional Summary
 
-## Quick Start
+Backend developer skilled in PHP, Laravel, Python, SQL, and REST APIs, with
+experience in web application development, database management, automation, and
+production support. Proficient in MySQL, PostgreSQL, Docker, Git, Linux, Nginx,
+SSH, DigitalOcean, and AWS S3, with additional experience in Kotlin and XML for
+Android development.
 
-```bash
-npm install
-npm run dev
-npm run build
-```
+## Skills
 
-This starter does not use `wrangler.jsonc`.
+**Languages:** PHP, Python, Kotlin, SQL, HTML, CSS, XML  
+**Frameworks:** Laravel, Blade  
+**APIs:** REST APIs, API integration, banking payment APIs  
+**Automation:** n8n, workflow automation  
+**Databases:** MySQL, PostgreSQL  
+**Cloud and storage:** DigitalOcean, AWS S3  
+**Server:** Linux, Nginx, SSH, server administration, troubleshooting  
+**Tools:** Git, GitHub, Docker, Postman, VS Code, PhpStorm, Android Studio
 
-## Included Shape
+## Work Experience
 
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
+### Associate Software Developer
 
-## Workspace Auth Headers
+**DropTruck - WeHaul Logistics Pvt Ltd, Chennai**  
+Dec 2025 - Current
 
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
+- Developing and maintaining Laravel/PHP application modules for internal
+  business workflows.
+- Working with MySQL, REST APIs, PHP scripts, database operations, and business
+  logic implementation.
+- Building n8n automation workflows and API integrations to support operational
+  processes.
+- Contributed to banking payment APIs, payment workflows, and transaction
+  processing.
+- Worked on AI voice call modules for customer support and AWS S3 file storage.
+- Managing Linux servers through SSH for deployment, website and database
+  maintenance, log monitoring, permissions, and troubleshooting.
 
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
+### Software Developer Intern
 
-Treat the full name as optional and fall back to email when it is absent:
+**DropTruck - WeHaul Logistics Pvt Ltd, Chennai**  
+Sep 2025 - Nov 2025
 
-```tsx
-import { headers } from "next/headers";
+- Worked on PHP and Laravel-based application modules and projects.
+- Implemented CRUD operations, authentication, routing, and MySQL database
+  integration.
+- Gained hands-on experience with REST APIs, backend workflows, debugging, and
+  Git.
 
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
+### Web Development Intern
 
-  const displayName = fullName ?? email;
-  // ...
-}
-```
+**Brassy Academy, Tirunelveli**  
+Feb 2023
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+- Worked with HTML, CSS, and Angular for responsive web application
+  development.
+- Improved frontend debugging, component-based development, and UI
+  implementation skills.
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+## Projects
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+### Insurance Management System
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Final-year Laravel/PHP application with authentication, policy management, user
+modules, admin workflows, and MySQL-backed operations.
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+**Tech:** Laravel, PHP, MySQL, HTML, CSS
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+### Job Board
 
-## Useful Commands
+Laravel learning project covering job posting, routing, forms, authentication,
+CRUD operations, and MySQL integration.
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm run db:generate`: generate Drizzle migrations after schema changes
+**Tech:** Laravel, PHP, MySQL
 
-## Learn More
+### Task Management
 
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+Laravel task tracking application built around routing, form handling, CRUD
+workflows, and MySQL persistence.
+
+**Tech:** Laravel, PHP, MySQL
+
+### Event Management
+
+Laravel event scheduling application focused on form handling, routing, backend
+logic, and database-driven records.
+
+**Tech:** Laravel, PHP, MySQL
+
+### Title Generator with Machine Learning
+
+Python project using TensorFlow, NumPy, Pandas, and Scikit-learn for model
+building and data processing.
+
+**Tech:** Python, TensorFlow, NumPy, Pandas, Scikit-learn
+
+## Education
+
+### Bachelor of Engineering - Computer Science
+
+**PET Engineering College, Tirunelveli**  
+2021 - 2025  
+CGPA: 8/10
+
+### HSSLC Board Exam
+
+**Government Higher Secondary School, Tirunelveli**  
+2021  
+Score: 88%
+
+## Certifications
+
+- Laravel & PHP Mastery: Build 5 Real-World Projects - Udemy, Sep 2025
+- Python for Everybody Specialization - University of Michigan, Coursera, Sep
+  2026
+
+## Languages
+
+- English
+- Tamil
+
+## Portfolio Project
+
+This repository contains my personal portfolio website built with React, Vite,
+Framer Motion, and custom responsive CSS. The site is deployed through GitHub
+Pages.
+
+For the original starter/operations notes, see [OPERATION_GUIDE.md](OPERATION_GUIDE.md).
