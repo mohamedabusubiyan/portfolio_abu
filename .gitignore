@@ -35,6 +35,7 @@ yarn-error.log*
 
 # typescript
 next-env.d.ts
+tsconfig.tsbuildinfo
 /dist/
 /.wrangler/
 
@@ -43,3 +44,6 @@ OPERATION_GUIDE.md
 
 # local-only nested repo copy
 /mohamedabusubiyan/
+
+# local package manager cache
+/.pnpm-store/
