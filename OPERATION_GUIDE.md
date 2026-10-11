@@ -1,97 +1,248 @@
-# vinext-starter
+# Portfolio Operation Guide
 
-A clean full-stack starter running on
-[vinext](https://github.com/cloudflare/vinext), with optional Cloudflare D1 and
-Drizzle support.
+This guide explains how to run, update, build, and deploy this portfolio.
 
-## Prerequisites
+Live site:
 
-- Node.js `>=22.13.0`
+```text
+https://mohamedabusubiyan.github.io/portfolio_abu/
+```
 
-## Quick Start
+Repository:
+
+```text
+git@github.com:mohamedabusubiyan/portfolio_abu.git
+```
+
+## Project Stack
+
+- React
+- Vite
+- TypeScript
+- Framer Motion
+- GitHub Pages
+
+The main portfolio source lives in:
+
+```text
+src/main.tsx
+src/styles.css
+public/
+```
+
+## Local Development
+
+Install dependencies if needed:
 
 ```bash
-npm install
-npm run dev
-npm run build
+pnpm.cmd install
 ```
 
-This starter does not use `wrangler.jsonc`.
+Start the local dev server:
 
-## Included Shape
-
-- edit site code under `app/`
-- `.openai/hosting.json` declares optional Sites D1 and R2 bindings
-- `vite.config.ts` simulates declared bindings for local development
-- `db/schema.ts` starts intentionally empty
-- `examples/d1/` contains an optional D1 example surface
-- `drizzle.config.ts` supports local migration generation when needed
-
-## Workspace Auth Headers
-
-OpenAI workspace sites can read the current user's email from
-`oai-authenticated-user-email`.
-
-SIWC-authenticated workspace sites may also receive
-`oai-authenticated-user-full-name` when the user's SIWC profile has a non-empty
-`name` claim. The full-name value is percent-encoded UTF-8 and is accompanied by
-`oai-authenticated-user-full-name-encoding: percent-encoded-utf-8`.
-
-Treat the full name as optional and fall back to email when it is absent:
-
-```tsx
-import { headers } from "next/headers";
-
-export default async function Home() {
-  const requestHeaders = await headers();
-  const email = requestHeaders.get("oai-authenticated-user-email");
-  const encodedFullName = requestHeaders.get("oai-authenticated-user-full-name");
-  const fullName =
-    encodedFullName &&
-    requestHeaders.get("oai-authenticated-user-full-name-encoding") ===
-      "percent-encoded-utf-8"
-      ? decodeURIComponent(encodedFullName)
-      : null;
-
-  const displayName = fullName ?? email;
-  // ...
-}
+```bash
+pnpm.cmd run dev
 ```
 
-## Optional Dispatch-Owned ChatGPT Sign-In
+The local URL is usually:
 
-Import the ready-to-use helpers from `app/chatgpt-auth.ts` when the site needs
-optional or required ChatGPT sign-in:
+```text
+http://127.0.0.1:5173
+```
 
-- Use `getChatGPTUser()` for optional signed-in UI.
-- Use `requireChatGPTUser(returnTo)` for server-rendered pages that should send
-  anonymous visitors through Sign in with ChatGPT.
-- Use `chatGPTSignInPath(returnTo)` and `chatGPTSignOutPath(returnTo)` for
-  browser links or actions.
-- Pass a same-origin relative `returnTo` path for the destination after sign-in
-  or sign-out. The helper validates and safely encodes it.
-- Mark protected pages with `export const dynamic = "force-dynamic"` because
-  they depend on per-request identity headers.
+## Production Build
 
-Dispatch owns `/signin-with-chatgpt`, `/signout-with-chatgpt`, `/callback`, the
-OAuth cookies, and identity header injection. Do not implement app routes for
-those reserved paths. Routes that do not import and call the helper remain
-anonymous-compatible.
+Build the portfolio:
 
-SIWC establishes identity only; it does not prove workspace membership. Use the
-Sites hosting platform's access policy controls for workspace-wide restrictions,
-or enforce explicit server-side membership or allowlist checks.
+```bash
+pnpm.cmd run build
+```
 
-Use SIWC for account pages, user-specific dashboards, saved records, and write
-actions tied to the current ChatGPT user. Leave public content anonymous.
+The generated static site is written to:
+
+```text
+dist/
+```
+
+## GitHub Pages Configuration
+
+This repository is deployed as a project page, so the Vite base path must stay:
+
+```ts
+base: "/portfolio_abu/"
+```
+
+That setting is in:
+
+```text
+vite.config.ts
+```
+
+GitHub Pages settings:
+
+- Source: `Deploy from a branch`
+- Branch: `gh-pages`
+- Folder: `/ (root)`
+
+## Deploy Flow
+
+Use this flow after any portfolio update.
+
+1. Build:
+
+```bash
+pnpm.cmd run build
+```
+
+2. Commit source changes to `main`:
+
+```bash
+git add .
+git commit -m "Update portfolio"
+git push origin main
+```
+
+3. Create a temporary deployment worktree:
+
+```bash
+git fetch origin gh-pages
+git worktree add .gh-pages-worktree gh-pages
+```
+
+4. Replace the deployment files with the latest build:
+
+```powershell
+$target = Resolve-Path .gh-pages-worktree
+Get-ChildItem -LiteralPath $target.Path -Force |
+  Where-Object { $_.Name -ne ".git" } |
+  Remove-Item -Recurse -Force
+
+Copy-Item -Path dist\* -Destination $target.Path -Recurse -Force
+```
+
+5. Commit and push the deployment branch:
+
+```bash
+git -C .gh-pages-worktree add -A
+git -C .gh-pages-worktree commit -m "Deploy latest portfolio"
+git -C .gh-pages-worktree push origin gh-pages
+```
+
+6. Remove the temporary worktree:
+
+```bash
+git worktree remove .gh-pages-worktree --force
+```
+
+GitHub Pages usually updates within a few minutes.
+
+## Resume Replacement
+
+The resume download file is stored in:
+
+```text
+public/MOHAMED ABU SUBIYAN M - SOFTWARE DEVELEPOR.pdf
+```
+
+The download URL is defined in:
+
+```text
+src/main.tsx
+```
+
+Current code:
+
+```ts
+const resumeHref = `${import.meta.env.BASE_URL}MOHAMED%20ABU%20SUBIYAN%20M%20-%20SOFTWARE%20DEVELEPOR.pdf`;
+```
+
+When replacing the resume:
+
+1. Copy the new PDF into `public/`.
+2. Keep the same filename, or update `resumeHref`.
+3. Run `pnpm.cmd run build`.
+4. Commit to `main`.
+5. Redeploy `gh-pages`.
+
+## Common Updates
+
+### Update Portfolio Text
+
+Edit:
+
+```text
+src/main.tsx
+```
+
+Important content arrays and sections:
+
+- `skills`
+- `projects`
+- `Experience`
+- `Education`
+- `Certifications`
+- Hero and About copy
+
+### Update Styling
+
+Edit:
+
+```text
+src/styles.css
+```
+
+Mobile styles are under:
+
+```css
+@media (max-width: 680px)
+```
+
+### Update README
+
+The public GitHub repo profile is:
+
+```text
+README.md
+```
+
+Keep it resume/profile focused.
+
+## Troubleshooting
+
+### Site Shows Old Version
+
+Hard refresh the browser:
+
+```text
+Ctrl + F5
+```
+
+GitHub Pages may also take 1-3 minutes to refresh after deployment.
+
+### Assets Do Not Load
+
+Check that `vite.config.ts` still contains:
+
+```ts
+base: "/portfolio_abu/"
+```
+
+### Resume Download Fails
+
+Confirm the PDF exists in `public/` and that `resumeHref` uses
+`import.meta.env.BASE_URL`.
+
+### Deployment Branch Has Source Files
+
+The `gh-pages` branch should contain only built static files from `dist/`, not
+the full source project.
 
 ## Useful Commands
 
-- `npm run dev`: start local development
-- `npm run build`: verify the vinext build output
-- `npm run db:generate`: generate Drizzle migrations after schema changes
-
-## Learn More
-
-- [vinext Documentation](https://github.com/cloudflare/vinext)
-- [Drizzle D1 Guide](https://orm.drizzle.team/docs/get-started/d1-new)
+```bash
+pnpm.cmd run dev
+pnpm.cmd run build
+git status --short --branch
+git push origin main
+git push origin gh-pages
+```
