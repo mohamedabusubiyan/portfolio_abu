@@ -5,7 +5,7 @@ import { motion, useReducedMotion } from "framer-motion";
 import "./styles.css";
 
 const githubUser = "mohamedabusubiyan";
-const resumeHref = `${import.meta.env.BASE_URL}MOHAMED%20ABU%20SUBIYAN%20M%20-%20Tech.pdf`;
+const resumeHref = `${import.meta.env.BASE_URL}MOHAMED%20ABU%20SUBIYAN%20M%20-%20SOFTWARE%20DEVELEPOR.pdf`;
 const contributionsApi = `https://github-contributions-api.jogruber.de/v4/${githubUser}?y=last`;
 const heroWords = ["Software", "Developer"];
 const introPanels = Array.from({ length: 24 }, (_, index) => index);
@@ -30,7 +30,8 @@ const skills = [
     items: [
       ["PHP", "https://skillicons.dev/icons?i=php"],
       ["Laravel", "https://skillicons.dev/icons?i=laravel"],
-      ["REST API", ""],
+      ["Blade", "https://skillicons.dev/icons?i=laravel"],
+      ["REST API", "", "API"],
     ],
   },
   {
@@ -45,8 +46,29 @@ const skills = [
     items: [
       ["Python", "https://skillicons.dev/icons?i=python"],
       ["Kotlin", "https://skillicons.dev/icons?i=kotlin"],
+      ["SQL", "", "SQL"],
       ["HTML", "https://skillicons.dev/icons?i=html"],
       ["CSS", "https://skillicons.dev/icons?i=css"],
+      ["XML", "", "XML"],
+    ],
+  },
+  {
+    group: "Automation",
+    items: [
+      ["n8n", "", "n8n"],
+      ["Workflow Automation", "", "AUTO"],
+      ["API Integration", "", "API"],
+    ],
+  },
+  {
+    group: "Cloud & Server",
+    items: [
+      ["DigitalOcean", "https://skillicons.dev/icons?i=digitalocean"],
+      ["AWS S3", "https://skillicons.dev/icons?i=aws"],
+      ["Linux", "https://skillicons.dev/icons?i=linux"],
+      ["Nginx", "https://skillicons.dev/icons?i=nginx"],
+      ["SSH", "", "SSH"],
+      ["Server Admin", "", "SRV"],
     ],
   },
   {
@@ -66,13 +88,13 @@ const skills = [
 const projects = [
   {
     title: "Insurance Management System",
-    copy: "Laravel/PHP application with authentication, policy workflows, user management, and MySQL-backed operations.",
+    copy: "Final-year Laravel/PHP application with authentication, policy management, user modules, admin workflows, and MySQL-backed operations.",
     tags: ["Laravel", "PHP", "MySQL", "Admin"],
     className: "insurance",
   },
   {
     title: "Job Board",
-    copy: "Web application covering job posting, routing, forms, authentication, CRUD operations, and database integration.",
+    copy: "Laravel learning project covering job posting, routing, forms, authentication, CRUD operations, and MySQL integration.",
     tags: ["Laravel", "CRUD", "Auth", "MySQL"],
     className: "jobs",
   },
@@ -84,7 +106,7 @@ const projects = [
   },
   {
     title: "Event Management",
-    copy: "Event scheduling application focused on form handling, routing, backend logic, and database-driven records.",
+    copy: "Laravel event scheduling application focused on form handling, routing, backend logic, and database-driven records.",
     tags: ["Laravel", "Events", "Forms", "SQL"],
     className: "events",
   },
@@ -203,8 +225,8 @@ function App() {
               </div>
               <div>
                 <p>MENU</p>
-                {["Home", "About Me", "Experience", "Projects"].map((item, index) => (
-                  <a key={item} href={item === "Home" ? "#home" : item === "About Me" ? "#about" : item === "Projects" ? "#work" : "#experience"} onClick={() => setMenuOpen(false)}>
+                {["Home", "About Me", "Experience", "Education", "Projects"].map((item, index) => (
+                  <a key={item} href={item === "Home" ? "#home" : item === "About Me" ? "#about" : item === "Projects" ? "#work" : item === "Education" ? "#education" : "#experience"} onClick={() => setMenuOpen(false)}>
                     <span className={`dot dot-${index}`} /> {item}
                   </a>
                 ))}
@@ -240,7 +262,7 @@ function App() {
             </h1>
             <motion.p className="hero-text" variants={revealUp}>
               Hi! I'm Abu, a software developer focused on building reliable web applications,
-              backend systems, REST APIs, and database-driven features.
+              backend systems, REST APIs, automation workflows, and database-driven features.
             </motion.p>
             <motion.div className="hero-actions reference-actions" variants={listReveal}>
               <motion.a className="button primary magnetic" href="#contact" variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }}>Let's Talk <ArrowUpRight size={17} /></motion.a>
@@ -268,11 +290,11 @@ function App() {
           <motion.div variants={revealUp}>
             <p>
               I'm a software developer focused on building reliable web applications,
-              clean backend logic, and practical features that are easy to maintain.
+              clean backend logic, automation workflows, and practical features that are easy to maintain.
             </p>
             <p>
               I work across application development, authentication, CRUD flows,
-              database design, API integration, debugging, deployment preparation,
+              database operations, API integration, production debugging, Linux server support,
               and collaborative Git-based development.
             </p>
           </motion.div>
@@ -289,9 +311,9 @@ function App() {
             <motion.article key={group} className="stack-row" variants={revealUp}>
               <h3>{group}</h3>
               <div className="skill-icons">
-                {items.map(([item, icon]) => (
+                {items.map(([item, icon, fallback]) => (
                   <span key={item}>
-                    {icon ? <img src={icon} alt="" /> : <i aria-hidden="true">API</i>}
+                    {icon ? <img src={icon} alt="" /> : <i aria-hidden="true">{fallback}</i>}
                     {item}
                   </span>
                 ))}
@@ -304,15 +326,38 @@ function App() {
       <section id="experience" className="section-shell split-section">
         <p className="section-label">Experience</p>
         <motion.div className="timeline" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
-          <Experience date="Sep 2025 - Present" title="Software Developer" company="DropTruck, WeHaul Logistics Pvt Ltd, Chennai" points={[
-            "Working on backend and frontend development for internal tools and panel management systems.",
-            "Developing Laravel-based web applications with MySQL database integration.",
-            "Implementing REST APIs, API routes, authentication, CRUD operations, and workflow-based features.",
-            "Using Git, GitHub, Postman, and Docker in development and testing workflows.",
+          <Experience date="Dec 2025 - Current" title="Associate Software Developer" company="DropTruck - WeHaul Logistics Pvt Ltd, Chennai" points={[
+            "Developing and maintaining Laravel/PHP application modules for internal business workflows.",
+            "Working with MySQL, REST APIs, PHP scripts, database operations, and business logic implementation.",
+            "Building n8n automation workflows and API integrations to support operational processes.",
+            "Contributed to banking payment APIs, payment workflows, and transaction processing.",
+            "Worked on AI voice call modules for customer support and AWS S3 file storage.",
+            "Managing Linux servers through SSH for deployment, website and database maintenance, log monitoring, permissions, and troubleshooting.",
+          ]} />
+          <Experience date="Sep 2025 - Nov 2025" title="Software Developer Intern" company="DropTruck - WeHaul Logistics Pvt Ltd, Chennai" points={[
+            "Worked on PHP and Laravel-based application modules and projects.",
+            "Implemented CRUD operations, authentication, routing, and MySQL database integration.",
+            "Gained hands-on experience with REST APIs, backend workflows, debugging, and Git.",
           ]} />
           <Experience date="Feb 2023" title="Web Development Intern" company="Brassy Academy, Tirunelveli" points={[
             "Worked with HTML, CSS, and Angular for responsive web application development.",
             "Improved frontend debugging, component-based development, and UI implementation skills.",
+          ]} />
+        </motion.div>
+      </section>
+
+      <section id="education" className="section-shell split-section">
+        <p className="section-label">Education</p>
+        <motion.div className="timeline" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+          <Experience date="2021 - 2025" title="B.E. Computer Science" company="PET Engineering College, Tirunelveli" points={[
+            "CGPA: 8/10",
+          ]} />
+          <Experience date="2021" title="HSSLC Board Exam" company="Government Higher Secondary School, Tirunelveli" points={[
+            "Score: 88%",
+          ]} />
+          <Experience date="Certifications" title="Learning & Certifications" company="Udemy / Coursera" points={[
+            "Laravel & PHP Mastery: Build 5 Real-World Projects - Udemy, Sep 2025.",
+            "Python for Everybody Specialization - University of Michigan, Coursera, Sep 2026.",
           ]} />
         </motion.div>
       </section>
@@ -340,7 +385,7 @@ function App() {
         <p className="section-label">Contact</p>
         <motion.div className="contact-card" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.25 }}>
           <motion.h2 variants={revealUp}>Let&apos;s build reliable web applications.</motion.h2>
-          <motion.p variants={revealUp}>Open to software developer roles focused on backend engineering, REST APIs, databases, and full-stack web development.</motion.p>
+          <motion.p variants={revealUp}>Open to software developer roles focused on backend engineering, REST APIs, automation, databases, server support, and full-stack web development.</motion.p>
           <motion.div className="contact-actions" variants={listReveal}>
             <motion.a variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button primary magnetic" href="mailto:mohamedabusubiyanm@gmail.com"><Mail size={17} /> Email Me</motion.a>
             <motion.button variants={revealUp} whileHover={shouldReduceMotion ? undefined : { scale: 1.03 }} className="button secondary magnetic" type="button" onClick={copyEmail}><Copy size={17} /> {copied ? "Copied" : "Copy Email"}</motion.button>
@@ -352,7 +397,7 @@ function App() {
 
       <footer>
         <span>Mohamed Abu Subiyan M</span>
-        <span>Tirunelveli, Tamil Nadu</span>
+        <span>Chennai, Tamil Nadu</span>
       </footer>
     </main>
   );

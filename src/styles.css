@@ -275,6 +275,7 @@ button { font: inherit; }
 .dot-1 { background: #4388ff; }
 .dot-2 { background: #28c7b7; }
 .dot-3 { background: #6d63ff; }
+.dot-4 { background: #00f050; }
 
 .section-shell {
   width: min(100% - 420px, 1180px);
