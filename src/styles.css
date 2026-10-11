@@ -649,6 +649,25 @@ h1, h2, h3, p { margin-top: 0; }
   font-size: 16px;
   line-height: 1.5;
 }
+.education-section {
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: clamp(42px, 7vw, 110px);
+}
+.education-section .section-label {
+  font-size: 14px;
+}
+.education-section .timeline {
+  gap: clamp(52px, 6vw, 82px);
+}
+.education-section .timeline h2 {
+  font-size: clamp(50px, 5.1vw, 68px);
+}
+.education-section .timeline ul {
+  max-width: 760px;
+}
+.education-section .timeline li {
+  font-size: 17px;
+}
 
 .project-list {
   display: grid;
@@ -804,6 +823,9 @@ footer {
   .about-grid,
   .section-heading {
     grid-template-columns: 1fr;
+  }
+  .education-section {
+    gap: 28px;
   }
   .about-section .section-label,
   .about-lead,

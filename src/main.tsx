@@ -346,7 +346,7 @@ function App() {
         </motion.div>
       </section>
 
-      <section id="education" className="section-shell split-section">
+      <section id="education" className="section-shell split-section education-section">
         <p className="section-label">Education</p>
         <motion.div className="timeline" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
           <Experience date="2021 - 2025" title="B.E. Computer Science" company="PET Engineering College, Tirunelveli" points={[
