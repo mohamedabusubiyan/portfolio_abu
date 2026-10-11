@@ -46,18 +46,18 @@ const skills = [
     items: [
       ["Python", "https://skillicons.dev/icons?i=python"],
       ["Kotlin", "https://skillicons.dev/icons?i=kotlin"],
-      ["SQL", "", "SQL"],
+      ["SQL", "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/azuresqldatabase/azuresqldatabase-original.svg", "SQL"],
       ["HTML", "https://skillicons.dev/icons?i=html"],
       ["CSS", "https://skillicons.dev/icons?i=css"],
-      ["XML", "", "XML"],
+      ["XML", "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/xml/xml-original.svg", "XML"],
     ],
   },
   {
     group: "Automation",
     items: [
-      ["n8n", "", "n8n"],
-      ["Workflow Automation", "", "AUTO"],
-      ["API Integration", "", "API"],
+      ["n8n", "https://cdn.simpleicons.org/n8n/00F050", "n8n"],
+      ["Workflow Automation", "https://cdn.simpleicons.org/automattic/00F050", "AUTO"],
+      ["API Integration", "https://cdn.simpleicons.org/swagger/00F050", "API"],
     ],
   },
   {
@@ -225,8 +225,8 @@ function App() {
               </div>
               <div>
                 <p>MENU</p>
-                {["Home", "About Me", "Experience", "Education", "Projects"].map((item, index) => (
-                  <a key={item} href={item === "Home" ? "#home" : item === "About Me" ? "#about" : item === "Projects" ? "#work" : item === "Education" ? "#education" : "#experience"} onClick={() => setMenuOpen(false)}>
+                {["Home", "About Me", "Experience", "Education", "Certifications", "Projects"].map((item, index) => (
+                  <a key={item} href={item === "Home" ? "#home" : item === "About Me" ? "#about" : item === "Projects" ? "#work" : item === "Education" ? "#education" : item === "Certifications" ? "#certifications" : "#experience"} onClick={() => setMenuOpen(false)}>
                     <span className={`dot dot-${index}`} /> {item}
                   </a>
                 ))}
@@ -355,10 +355,25 @@ function App() {
           <Experience date="2021" title="HSSLC Board Exam" company="Government Higher Secondary School, Tirunelveli" points={[
             "Score: 88%",
           ]} />
-          <Experience date="Certifications" title="Learning & Certifications" company="Udemy / Coursera" points={[
-            "Laravel & PHP Mastery: Build 5 Real-World Projects - Udemy, Sep 2025.",
-            "Python for Everybody Specialization - University of Michigan, Coursera, Sep 2026.",
-          ]} />
+        </motion.div>
+      </section>
+
+      <section id="certifications" className="section-shell">
+        <div className="stack-title cert-title">
+          <span>*</span>
+          <p>Certifications</p>
+        </div>
+        <motion.div className="cert-list" variants={listReveal} initial="hidden" whileInView="show" viewport={{ once: true, amount: 0.2 }}>
+          <motion.article className="cert-card" variants={revealUp}>
+            <span>Udemy / Sep 2025</span>
+            <h3>Laravel & PHP Mastery</h3>
+            <p>Build 5 Real-World Projects</p>
+          </motion.article>
+          <motion.article className="cert-card" variants={revealUp}>
+            <span>University of Michigan - Coursera / Sep 2026</span>
+            <h3>Python for Everybody Specialization</h3>
+            <p>Python programming fundamentals, data handling, and practical problem solving.</p>
+          </motion.article>
         </motion.div>
       </section>
 
