@@ -413,6 +413,7 @@ function App() {
       <footer>
         <span>Mohamed Abu Subiyan M</span>
         <span>Chennai, Tamil Nadu</span>
+        <span>© 2026 Mohamed Abu Subiyan M. All rights reserved.</span>
       </footer>
     </main>
   );
